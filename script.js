@@ -1,12 +1,26 @@
 let todoList = []
+document.getElementById("1").addEventListener("click",()=>{filterListTodoById(1)});
+document.getElementById("2").addEventListener("click",()=>{filterListTodoById(2)});
+document.getElementById("3").addEventListener("click",()=>{filterListTodoById(3)});
+document.getElementById("4").addEventListener("click",()=>{filterListTodoById(4)});
+document.getElementById("5").addEventListener("click",()=>{filterListTodoById(5)});
+document.getElementById("6").addEventListener("click",()=>{filterListTodoById(6)});
+document.getElementById("7").addEventListener("click",()=>{filterListTodoById(7)});
+document.getElementById("8").addEventListener("click",()=>{filterListTodoById(8)});
+document.getElementById("9").addEventListener("click",()=>{filterListTodoById(9)});
+document.getElementById("10").addEventListener("click",()=>{filterListTodoById(10)});
 
+
+
+// Directly fetch when page loaded
 getListTodo().then((result)=>{
   todoList = [...result]
-  filterListTodoById(3).then((result)=>{
-    console.log(result)
-  })
+  console.log(result)
 
-}).catch((err)=>console.log(`Error on script.js: ${result}`));
+
+}).catch((err)=>console.log(`Error on script.js: ${err}`));
+
+
 
 
 
@@ -21,15 +35,15 @@ async function getListTodo() {
   }
   
   
-  async function filterListTodoById(id){
+ function filterListTodoById(id){
     const filteredTodoList = []
 
     for (const element of todoList) {
       element.userId ===id ?filteredTodoList.push(element):null
       
     }
-   return filteredTodoList
+    console.log(filteredTodoList)
+  //  return filteredTodoList
   }
 
 
-// const object = {completed: false,id:2,title: "quis ut nam facilis et officia qui",userId: 1}
