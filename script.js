@@ -1,5 +1,5 @@
 let todoList = []
-const dropdownMenu = document.getElementById('list-menu');
+const tableBody = document.getElementById('table-body');
 
 document.getElementById("1").addEventListener("click",()=>{filterListTodoById(1)});
 document.getElementById("2").addEventListener("click",()=>{filterListTodoById(2)});
@@ -15,6 +15,10 @@ document.getElementById("10").addEventListener("click",()=>{filterListTodoById(1
 getListTodo()
   .then((result) => {
     todoList = [...result];
+
+    for (const item of todoList) {
+     insertTableItem(item)
+    }
   })
   .catch((err) => console.log(`Error on script.js: ${err}`));
 
@@ -29,14 +33,42 @@ async function getListTodo() {
 }
 
 function filterListTodoById(filterId) {
-  dropdownMenu.innerHTML = "";
+  tableBody.innerHTML = "";
 
-  for (const { userId, id, title } of todoList) {
-    if (userId === filterId) {
-      const item = document.createElement("li");
-      item.textContent = `${id}: ${title}`;
-      item.className = "list-group-item";
-      dropdownMenu.appendChild(item);
+  for (const item of todoList) {
+    if (item.userId === filterId) {
+      insertTableItem(item)
     }
   }
+}
+
+
+function insertTableItem({ userId, id, title,completed }){
+
+  const tr = document.createElement('tr');
+            
+  // Create and populate the table header cell
+  const th = document.createElement('th');
+  th.setAttribute('scope', 'row');
+  th.textContent = `${userId}`;
+  
+  // Create and populate the table data cells
+  const td1 = document.createElement('td');
+  td1.textContent = `${id}`;
+  
+  const td2 = document.createElement('td');
+  td2.textContent = `${title}`;
+  
+  const td3 = document.createElement('td');
+  td3.textContent = `${completed}`;
+  
+  // Append cells to the row
+  tr.appendChild(th);
+  tr.appendChild(td1);
+  tr.appendChild(td2);
+  tr.appendChild(td3);
+  
+  // Append the row to the table body
+  tableBody.appendChild(tr);
+
 }
